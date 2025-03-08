@@ -1,0 +1,31 @@
+# Ignore node_modules to prevent conflicts with dependencies inside the container
+node_modules
+
+# Ignore log files
+logs
+*.log
+
+# Ignore environment files to prevent sensitive data from being included in the image
+.env
+.env.local
+.env.development
+.env.test
+.env.*.local
+
+# Ignore dependency manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore editor and OS-specific files
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Ignore build output directories
+dist/
+build/
+
+# Ignore temporary Docker files
+docker-compose.override.yml
