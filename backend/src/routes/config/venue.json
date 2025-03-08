@@ -1,0 +1,7 @@
+[
+    {
+        "path": "/v1/venue/get",
+        "method": "get",
+        "controller": "venue.getVenues"
+    }
+]
