@@ -50,21 +50,21 @@
     </div>
 
     <div class="w-full bg-black text-white px-4 py-2 flex flex-row *:px-4 divide-x border-y sticky top-0">
-        <form name="form-sort">
+        <form name="form-sort" class="flex-grow-0">
             <label for="sort">Sort by:</label>
             <select name="sort-name" id="sort" onchange="fetchVenues()">
-                <option value="name">Name</option>
-                <option value="date">Date</option>
+                <option value="name" class="text-black">Name</option>
+                <option value="date" class="text-black">Date</option>
             </select>
         </form>
-        <form name="form-add" class="flex-1 flex flex-col">
+        <form name="form-add" class="flex-1">
             <label for="name">Name</label>
-            <input id="name" type="text" required>
+            <input class="border border-white" id="name" type="text" required>
             <label for="url">URL</label>
-            <input id="url" type="url" required>
+            <input class="border border-white" id="url" type="url" required>
             <label for="district">District</label>
-            <input id="district" type="text">
-            <button type="button" onclick="addVenue()" class="mt-2 bg-green-500 text-white p-2 rounded">Add
+            <input class="border border-white" id="district" type="text">
+            <button type="button" onclick="addVenue()" class="bg-green-500 text-white p-2 rounded">Add
                 Venue</button>
         </form>
     </div>
