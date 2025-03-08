@@ -1,10 +1,33 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = require('./routes/router');
+const Venue = require('./Venue');
+const fs = require('fs');
+const path = require ('path');
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 
+const importData = async () => {
+  try {
+    const mongoURI = process.env.DB_URI;
+    await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+    console.log('Database connected');
+
+    const data = fs.readFileSync(path.join(__dirname, 'stores.json'), 'utf8');
+    const venues = JSON.parse(data);
+
+    await Venue.insertMany(venues);
+    console.log('Data imported successfully');
+
+    mongoose.disconnect();
+  } catch (err) {
+    console.error('Error importing data:', err);
+  }
+};
+
+importData();
 
 app.use((req, res, next) => { 
     res.setHeader('Access-Control-Allow-Origin', '*');
