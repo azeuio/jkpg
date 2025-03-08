@@ -69,38 +69,11 @@
         </form>
     </div>
 
-    <ul id="venues" class="divide-y">
-        <li class="flex flex-row h-[12.5vh]">
-            <img class="jkpg-img"
-                src="https://ju.se/images/18.6378cb5a189b01b94a223771/1710837902389/JU-horisont-panorama-700.webp" />
-            <div class="flex flex-col mx-4 my-2 w-full">
-                <div>
-                    <div class="flex flex-row w-full justify-between">
-                        <div class="jkpg-title font-semibold text-2xl">Hello world</div>
-                        <div class="jkpg-date">
-                            14:46 11-09-2001
-                        </div>
-                    </div>
-                    <div class="jkpg-place">Av. Gustave Eiffel, 75007 Paris, France</div>
-                </div>
-            </div>
-        </li>
-        <li class="flex flex-row h-[12.5vh]">
-            <img class="jkpg-img"
-                src="https://ju.se/images/18.6378cb5a189b01b94a223771/1710837902389/JU-horisont-panorama-700.webp" />
-            <div class="flex flex-col mx-4 my-2 w-full">
-                <div>
-                    <div class="flex flex-row w-full justify-between">
-                        <div class="jkpg-title font-semibold text-2xl">Hello world</div>
-                        <div class="jkpg-date">
-                            14:46 11-09-2001
-                        </div>
-                    </div>
-                    <div class="jkpg-place">Av. Gustave Eiffel, 75007 Paris, France</div>
-                </div>
-            </div>
-        </li>
-    </ul>
+    <div class="pagination flex justify-center mt-4">
+        <button id="prev" class="px-4 py-2 bg-blue-500 text-white rounded-l-lg">Previous</button>
+        <span id="page-number" class="px-4 py-2">1</span>
+        <button id="next" class="px-4 py-2 bg-blue-500 text-white rounded-r-lg">Next</button>
+    </div>    
 </body>
 
 <footer class="container mx-auto w-full max-w-8xl px-4 md:px-8 mb-0 p-0">

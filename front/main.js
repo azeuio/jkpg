@@ -1,17 +1,45 @@
-async function fetchVenues() {
-    const response = await fetch('/venues');
-    const venues = await response.json();
-    const venueContainer = document.getElementById('venues');
-    venueContainer.innerHTML = venues.map(v => `
-        <div class="p-4 border rounded bg-gray-100 flex justify-between items-center">
-            <div>
-                <h3 class="text-lg font-semibold">${v.name}</h3>
-                <p><a href="${v.url}" target="_blank" class="text-blue-500">${v.url}</a></p>
-                <p>District: ${v.district}</p>
+let currentPage = 1;
+
+async function fetchVenues(page = 1) {
+    const response = await fetch(`/v1/venues/get/${page}`);
+    const data = await response.json();
+
+    if (response.ok) {
+        const venues = data.venues;
+        const venueContainer = document.getElementById('venues');
+        venueContainer.innerHTML = venues.map(v => `
+            <div class="p-4 border rounded bg-gray-100 flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-semibold">${v.name}</h3>
+                    <p><a href="${v.url}" target="_blank" class="text-blue-500">${v.url}</a></p>
+                    <p>District: ${v.district}</p>
+                </div>
+                <button onclick="deleteVenue('${v._id}')" class="bg-red-500 text-white p-2">Delete</button>
             </div>
-            <button onclick="deleteVenue('${v._id}')" class="bg-red-500 text-white p-2">Delete</button>
-        </div>
-    `).join('');
+        `).join('');
+
+        updatePagination(page);
+    } else {
+        alert('Error fetching venues');
+    }
+}
+
+function updatePagination(page) {
+    const prevButton = document.getElementById('prev');
+    const nextButton = document.getElementById('next');
+    
+    prevButton.disabled = page <= 1;
+    nextButton.disabled = page >= totalPages;
+
+    currentPage = page;
+}
+
+function nextPage() {
+    fetchVenues(currentPage + 1);
+}
+
+function prevPage() {
+    fetchVenues(currentPage - 1);
 }
 
 async function addVenue() {
@@ -23,32 +51,12 @@ async function addVenue() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, url, district })
     });
-    fetchVenues();
+    fetchVenues(currentPage);
 }
 
 async function deleteVenue(id) {
     await fetch(`/venues/${id}`, { method: 'DELETE' });
-    fetchVenues();
+    fetchVenues(currentPage); 
 }
 
-async function login() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const response = await fetch('/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    });
-    if (response.ok) {
-        alert('Logged in successfully');
-    } else {
-        alert('Invalid credentials');
-    }
-}
-
-async function logout() {
-    await fetch('/auth/logout', { method: 'POST' });
-    alert('Logged out');
-}
-
-fetchVenues();
+fetchVenues(currentPage);
