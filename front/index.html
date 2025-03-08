@@ -12,8 +12,8 @@
 </head>
 
 <body>
-    <div class="relative flex flex-col bg-black h-[50vh]">
-        <div class="absolute mx-52 py-4 px-2">
+    <div class="relative flex flex-col bg-black h-[75vh] overflow-clip">
+        <div class="absolute mx-52 py-4 px-2 z-10">
             <svg width="388" height="91" viewBox="0 0 388 91" xmlns="http://www.w3.org/2000/svg"
                 class="w-auto h-8 md:h-12 max-w-full">
                 <path stroke="white" fill="white"
@@ -21,13 +21,14 @@
                 </path>
             </svg>
         </div>
-        <video class="md:hidden h-full" autoplay="" playsinline="" loop="" preload="metadata"
+        <video class="md:hidden w-[177.77777778vh] min-w-full min-h-[56.25vw] h-full md:block absolute bottom-0"
+            autoplay="" playsinline="" loop="" preload="metadata"
             poster="https://cdn.gracestudio.io/jkpg-city/Header_Mobile_02_52c28a3701/Header_Mobile_02_52c28a3701.webp">
             <source
                 src="https://cdn.gracestudio.io/jkpg-city/Header_Mobile_02_ced125932f/Header_Mobile_02_ced125932f.mp4">
         </video>
-        <video class="hidden h-full md:block" muted="true" autoplay="true" playsinline="" loop="true" preload="metadata"
-            poster="">
+        <video class="hidden w-[177.77777778vh] min-w-full min-h-[56.25vw] h-full md:block absolute bottom-0"
+            muted="true" autoplay="true" playsinline="" loop="true" preload="metadata" poster="">
             <source src="https://cdn.gracestudio.io/jkpg-city/Header_16_9_03_78b04b7dbf/Header_16_9_03_78b04b7dbf.mp4">
         </video>
     </div>
