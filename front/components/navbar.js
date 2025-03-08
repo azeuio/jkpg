@@ -1,0 +1,22 @@
+// <navbar></navbar>
+class Navbar extends HTMLElement {
+    constructor() {
+        super(); // always call super() first in the ctor.
+        console.log("hello")
+    }
+    connectedCallback() {
+        // Render HTML
+        this.innerHTML =
+            `<p>
+                hello world
+            </p>`;
+    }
+    disconnectedCallback() {
+        // ...
+    }
+    attributeChangedCallback(attrName, oldVal, newVal) {
+        // ...
+    }
+}
+
+window.customElements.define('jkpg-navbar', Navbar);
