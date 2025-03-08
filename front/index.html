@@ -21,32 +21,53 @@
         </svg>
     </div>
 
+    <div class="w-full bg-black text-white px-4 py-2 flex flex-row *:px-4 divide-x mt-8 border-y">
+        <form name="form-sort">
+            <label for="sort">Sort by:</label>
+            <select name="sort-name" id="sort">
+                <option value="name">name</option>
+                <option value="date">date</option>
+            </select>
+        </form>
+        <form name="form-add">
+            <label id="form-add-name">Name</label>
+            <input id="form-add-name" type="text">
+            <label id="form-add-date">Date</label>
+            <input id="form-add-date" type="datetime">
+            <label id="form-add-place">Place</label>
+            <input id="form-add-place" type="text">
+            <label id="form-add-image">Image</label>
+            <input id="form-add-image" type="image">
+        </form>
+    </div>
     <ul class="divide-y">
         <li class="flex flex-row h-[12.5vh]">
-            <img src="https://ju.se/images/18.6378cb5a189b01b94a223771/1710837902389/JU-horisont-panorama-700.webp" />
+            <img class="jkpg-img"
+                src="https://ju.se/images/18.6378cb5a189b01b94a223771/1710837902389/JU-horisont-panorama-700.webp" />
             <div class="flex flex-col mx-4 my-2 w-full">
                 <div>
                     <div class="flex flex-row w-full justify-between">
-                        <div class="font-semibold text-2xl">Hello world</div>
-                        <div>
+                        <div class="jkpg-title font-semibold text-2xl">Hello world</div>
+                        <div class="jkpg-date">
                             14:46 11-09-2001
                         </div>
                     </div>
-                    <div>Av. Gustave Eiffel, 75007 Paris, France</div>
+                    <div class="jkpg-place">Av. Gustave Eiffel, 75007 Paris, France</div>
                 </div>
             </div>
         </li>
         <li class="flex flex-row h-[12.5vh]">
-            <img src="https://ju.se/images/18.6378cb5a189b01b94a223771/1710837902389/JU-horisont-panorama-700.webp" />
+            <img class="jkpg-img"
+                src="https://ju.se/images/18.6378cb5a189b01b94a223771/1710837902389/JU-horisont-panorama-700.webp" />
             <div class="flex flex-col mx-4 my-2 w-full">
                 <div>
                     <div class="flex flex-row w-full justify-between">
-                        <div class="font-semibold text-2xl">Hello world</div>
-                        <div>
+                        <div class="jkpg-title font-semibold text-2xl">Hello world</div>
+                        <div class="jkpg-date">
                             14:46 11-09-2001
                         </div>
                     </div>
-                    <div>Av. Gustave Eiffel, 75007 Paris, France</div>
+                    <div class="jkpg-place">Av. Gustave Eiffel, 75007 Paris, France</div>
                 </div>
             </div>
         </li>
