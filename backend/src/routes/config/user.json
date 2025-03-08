@@ -1,0 +1,12 @@
+[
+    {
+        "path": "/v1/user/create",
+        "method": "post",
+        "controller": "user.createUser"
+    },
+    {
+        "path": "/v1/user/login",
+        "method": "post",
+        "controller": "user.loginUser"
+    }
+]

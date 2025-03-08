@@ -46,11 +46,16 @@ function loadMiddlewares(dir) {
 
 function loadControllers(dir) {
   const controllers = {};
-  fs.readdirSync(dir).forEach(file => {
+  const files = fs.readdirSync(dir);
+  
+  console.log('Fichiers trouvés dans controllers:', files);
+
+  files.forEach(file => {
     if (file.endsWith('Controller.js')) {
       const controllerName = file.replace('Controller.js', '');
       try {
         controllers[controllerName] = require(path.join(dir, file));
+        console.log(`Contrôleur chargé: ${controllerName}`);
       } catch (error) {
         console.error(`Erreur lors du chargement du contrôleur: ${file}`, error);
       }
@@ -58,6 +63,7 @@ function loadControllers(dir) {
   });
   return controllers;
 }
+
 
 const controllers = loadControllers(path.resolve(__dirname, '../controllers'));
 
