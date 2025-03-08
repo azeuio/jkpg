@@ -4,6 +4,7 @@ const router = require('./routes/router');
 const Venue = require('./models/Venue');
 const fs = require('fs');
 const path = require ('path');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
@@ -20,15 +21,11 @@ const importData = async () => {
   }
 };
 
-importData();
-
-app.use((req, res, next) => { 
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
-}
-);
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use((req, res, next) => {
     const start = Date.now();
@@ -66,6 +63,7 @@ mongoose
   })
   .then(() => {
     console.log('DATABASE CONNECTION OK!');
+    importData();
     app.listen(PORT, () => {
       console.log(`This server is running on port ${PORT}`);
     });
@@ -74,5 +72,5 @@ mongoose
     console.log('Database Error', error);
     process.exit(1);
   });
-  
+
 
