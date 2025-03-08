@@ -1,7 +1,7 @@
 let currentPage = 1;
 
 async function fetchVenues(page = 1) {
-    const response = await fetch(`/v1/venue/get/${page}`);
+    const response = await fetch(`http://localhost:3001/api/v1/venue/get?page=${page}`);
     const data = await response.json();
 
     if (response.ok) {

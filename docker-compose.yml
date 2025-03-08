@@ -4,6 +4,7 @@ services:
     build: ./front
     ports:
       - "80:80"
+    restart: always
 
   mongodb:
     image: mongo:latest
