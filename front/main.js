@@ -1,5 +1,5 @@
 async function fetchVenues() {
-    const response = await fetch('/venues');
+    const response = await fetch('/api/venues');
     const venues = await response.json();
     const venueContainer = document.getElementById('venues');
     venueContainer.innerHTML = venues.map(v => `
