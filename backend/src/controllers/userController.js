@@ -1,4 +1,5 @@
 const userService = require('../models/user');
+const winston = require('winston');
 
 const HTTP_STATUS = {
     OK: 200,
