@@ -24,22 +24,24 @@ const HTTP_STATUS = {
 
   const getVenues = async (req, res) => {
     try {
-        logger.info('Getting venues');
-        const venues = await venueService.get();
+        const page = parseInt(req.query.page) || 1;
+
+        logger.info('Getting venues with pagination', { page });        
+        const venues = await venueService.get(page);
         
         return res.status(HTTP_STATUS.OK).json({
             message: 'Venues retrieved successfully',
             venues
         });
-    }
-    catch (error) {
+    } catch (error) {
         logger.error('Error getting venues:', error);
         return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
             message: 'Error getting venues',
             error: error.message
         });
     }
-  }
+};
+
 
     module.exports = {
         getVenues

@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = require('./routes/router');
-const Venue = require('./models/Venue');
+const venueService = require('./models/Venue');
 const fs = require('fs');
 const path = require ('path');
 const cors = require('cors');
@@ -14,10 +14,10 @@ const importData = async () => {
     const data = fs.readFileSync(path.join(__dirname, 'stores.json'), 'utf8');
     const venues = JSON.parse(data);
 
-    await Venue.insertMany(venues);
+    await venueService.insertMany(venues);
     console.log('Data imported successfully');
-  } catch (err) {
-    console.error('Error importing data:', err);
+  } catch (error) {
+    console.error('Error importing data:', error);
   }
 };
 

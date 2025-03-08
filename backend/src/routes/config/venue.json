@@ -1,6 +1,6 @@
 [
     {
-        "path": "/v1/venue/get",
+        "path": "/v1/venue/get/{page}",
         "method": "get",
         "controller": "venue.getVenues"
     }
