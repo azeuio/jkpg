@@ -27,7 +27,7 @@ async function fetchVenues(page = 1) {
 function updatePagination(page) {
     const prevButton = document.getElementById('prev');
     const nextButton = document.getElementById('next');
-    
+
     prevButton.disabled = page <= 1;
     nextButton.disabled = page >= totalPages;
 
@@ -56,7 +56,45 @@ async function addVenue() {
 
 async function deleteVenue(id) {
     await fetch(`/venues/${id}`, { method: 'DELETE' });
-    fetchVenues(currentPage); 
+    fetchVenues(currentPage);
+}
+
+async function login(event) {
+    const fd = new FormData(event.target)
+    const username = fd.get("username")
+    const password = fd.get("password")
+    const response = await fetch("http://localhost:3001/api/v1/user/login",
+        {
+            method: 'POST',
+            body: JSON.stringify({ username, password }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': '*/*'
+            }
+        }
+    )
+    if (response.ok) {
+        const form = document.getElementById("form-add")
+        if (form) {
+            form.hidden = false
+        }
+    }
+}
+
+async function register(event) {
+    const fd = new FormData(event.target)
+    const username = fd.get("username")
+    const password = fd.get("password")
+    await fetch("http://localhost:3001/api/v1/user/create",
+        {
+            method: 'POST',
+            body: JSON.stringify({ username, password }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': '*/*'
+            }
+        }
+    )
 }
 
 fetchVenues(currentPage);

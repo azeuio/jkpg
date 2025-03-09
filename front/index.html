@@ -34,11 +34,21 @@
     </div>
     <!-- Login Form -->
     <div class="flex justify-center py-4">
-        <form id="login-form" class="bg-white p-4 rounded shadow-md" onsubmit="event.preventDefault(); login();">
+        <form id="login-form" class="bg-white p-4 rounded shadow-md" onsubmit="event.preventDefault(); login(event);">
             <h2 class="text-lg font-semibold mb-2">Login</h2>
-            <input type="text" id="username" placeholder="Username" class="p-2 mb-2 border rounded" required />
-            <input type="password" id="password" placeholder="Password" class="p-2 mb-2 border rounded" required />
-            <button type="submit" class="bg-blue-500 text-white p-2 rounded">Login</button>
+            <input type="text" name="username" placeholder="Username" class="p-2 mb-2 border rounded" required />
+            <input type="password" name="password" placeholder="Password" class="p-2 mb-2 border rounded" required />
+            <button type="submit" class="bg-blue-500 text-white p-2 rounded cursor-pointer">Login</button>
+        </form>
+    </div>
+    <!-- register Form -->
+    <div class="flex justify-center py-4">
+        <form id="register-form" class="bg-white p-4 rounded shadow-md"
+            onsubmit="event.preventDefault(); register(event);">
+            <h2 class="text-lg font-semibold mb-2">Register</h2>
+            <input type="text" name="username" placeholder="Username" class="p-2 mb-2 border rounded" required />
+            <input type="password" name="password" placeholder="Password" class="p-2 mb-2 border rounded" required />
+            <button type="submit" class="bg-blue-500 text-white p-2 rounded cursor-pointer">Register</button>
         </form>
     </div>
 
@@ -57,7 +67,7 @@
                 <option value="date" class="text-black">Date</option>
             </select>
         </form>
-        <form name="form-add" class="flex-1">
+        <form id="form-add" name="form-add" class="flex-1" hidden>
             <label for="name">Name</label>
             <input class="border border-white" id="name" type="text" required>
             <label for="url">URL</label>
