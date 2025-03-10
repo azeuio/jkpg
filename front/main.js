@@ -1,10 +1,22 @@
 let currentPage = 1;
+function loadPage() {
+    console.log("hello")
+    const pageNumber = document.getElementById('page-number');
+    if (pageNumber) {
+        currentPage = Number.parseInt(pageNumber.innerText)
+    } else {
+        currentPage = 1
+    }
+    fetchVenues(currentPage)
+}
+loadPage()
 
 async function fetchVenues(page = 1) {
     page = Math.max(1, page)
     const response = await fetch(`http://localhost:3001/api/v1/venue/get?page=${page}`);
     const data = await response.json();
 
+    console.log("response ", response.ok, " ", response.status)
     if (response.ok) {
         const pageNumber = document.getElementById('page-number');
         if (pageNumber) {
@@ -110,4 +122,3 @@ async function register(event) {
     )
 }
 
-fetchVenues(currentPage);
