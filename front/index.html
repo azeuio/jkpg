@@ -125,15 +125,13 @@
     </div>
     <div id="venues">loading...</div>
 
-    <div id="venues-buttons">
-        <li>
-            <input type="text" class="venue-name" id="name-{id}" placeholder="Name">
-            <input type="url" class="venue-url" id="url-{id}" placeholder="URL">
-            <input type="text" class="venue-district" id="district-{id}" placeholder="District">
-            <button class="edit-venue" onclick="editVenue('{id}')">Edit</button>
-            <button class="delete-venue" onclick="deleteVenue('{id}')">Delete</button>
-        </li>
-    </div>
+    <form id="edit-form" hidden>
+        <input type="text" id="edit-name" placeholder="Name" required>
+        <input type="text" id="edit-url" placeholder="URL" required>
+        <input type="text" id="edit-district" placeholder="District" required>
+        <button type="submit" class="bg-blue-500 text-white p-2">Save Changes</button>
+        <button type="button" onclick="hideEditForm()" class="bg-gray-500 text-white p-2">Cancel</button>
+    </form>
 
     <script src='./main.js'></script>
 
