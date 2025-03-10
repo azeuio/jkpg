@@ -33,8 +33,10 @@ async function fetchVenues(page = 1) {
                     <p>District: ${v.district}</p>
                 </div>
                 <div class="venue-actions flex space-x-2"> <!-- Flex container for the buttons -->
-                    <button onclick="showEditForm('${v._id}', '${v.name}', '${v.url}', '${v.district}')" class="bg-blue-500 text-white p-2">Edit</button>
-                    <button onclick="deleteVenue('${v._id}')" class="bg-red-500 text-white p-2">Delete</button>
+                    <div>
+                <button onclick="showEditForm('${v._id}', '${v.name}', '${v.url}', '${v.district}')" ${loggedIn ? "" : "hidden"} class="edit-button p-2 bg-blue-500 text-white p-2">Edit</button>
+                    <button onclick="deleteVenue('${v._id}')" ${loggedIn ? "" : "hidden"} class="delete-button bg-red-500 text-white p-2">Delete</button>
+                </div>
                 </div>
                 <!-- Form for editing a venue, hidden by default -->
                 <form id="edit-form-${v._id}" class="edit-form" hidden>
@@ -145,7 +147,7 @@ async function register(event) {
 function showEditForm(id, name, url, district) {
     const editForm = document.getElementById(`edit-form-${id}`);
     const venueDiv = document.getElementById(`venue-${id}`);
-    
+
     document.getElementById(`edit-name-${id}`).value = name;
     document.getElementById(`edit-url-${id}`).value = url;
     document.getElementById(`edit-district-${id}`).value = district;
