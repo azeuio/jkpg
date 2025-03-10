@@ -47,7 +47,7 @@ const HTTP_STATUS = {
         const page = parseInt(req.query.page) || 1;
 
         logger.info('Getting venues with pagination', { page });        
-        const venues = await venueService.get(page);
+        const venues = await venueService.get(page, req.params.nom, parseInt(req.params.value));
         
         return res.status(HTTP_STATUS.OK).json({
             message: 'Venues retrieved successfully',
