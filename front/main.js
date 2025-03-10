@@ -1,7 +1,12 @@
 let loggedIn = false
 let currentPage = 1;
 function loadPage() {
-    console.log("hello")
+    const storedLoggedIn = localStorage.getItem('loggedIn');
+    if (storedLoggedIn === 'true') {
+        loggedIn = true;
+    } else {
+        loggedIn = false;
+    }
     const pageNumber = document.getElementById('page-number');
     if (pageNumber) {
         currentPage = Number.parseInt(pageNumber.innerText)
@@ -114,6 +119,7 @@ async function login(event) {
     )
     if (response.ok) {
         loggedIn = true
+        localStorage.setItem('loggedIn', 'true');
         const form = document.getElementById("form-add")
         if (form) {
             form.hidden = false
