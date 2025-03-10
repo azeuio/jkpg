@@ -7,7 +7,9 @@ services:
     develop:
       watch:
         - action: rebuild
-          path: "."
+          path: "./front/index.html"
+        - action: rebuild
+          path: "./front/main.js"
     restart: always
 
   mongodb:
