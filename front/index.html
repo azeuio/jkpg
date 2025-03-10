@@ -10,6 +10,7 @@
     <script src='./main.js'></script>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
+
 <body>
     <div class="relative flex flex-col bg-black h-[75vh] overflow-clip">
         <div class="absolute mx-52 py-4 px-2 z-10">
@@ -27,47 +28,56 @@
                     background-color: transparent;
                     padding: 10px;
                 }
+
                 .popup.show {
                     right: 1px;
                 }
             </style>
             <div class="absolute top-5 left-350">
-                <button id="show-register-form" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-transparent hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-                    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-transparent rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+                <button id="show-register-form"
+                    class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-transparent hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                    <span
+                        class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-transparent rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
                         Register
                     </span>
                 </button>
                 <form id="register-form" class="popup hidden" onsubmit="event.preventDefault(); register(event);">
-                    <input type="text" name="username" placeholder="Username" class="p-2 mb-2 border bg-gray-500 border-gray-500 text-base text-white rounded" required />
-                    <input type="password" name="password" placeholder="Password" class="p-2 mb-2 border bg-gray-500 border-gray-500 text-base text-white rounded" required />
+                    <input type="text" name="username" placeholder="Username"
+                        class="p-2 mb-2 border bg-gray-500 border-gray-500 text-base text-white rounded" required />
+                    <input type="password" name="password" placeholder="Password"
+                        class="p-2 mb-2 border bg-gray-500 border-gray-500 text-base text-white rounded" required />
                     <div class="flex justify-center">
                         <button type="submit" class="bg-blue-500 text-white p-2 rounded">Register</button>
                     </div>
                 </form>
             </div>
-            
+
             <div class="absolute top-5 left-320">
-                <button id="show-login-form" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-transparent hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-                    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-transparent rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+                <button id="show-login-form"
+                    class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-transparent hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                    <span
+                        class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-transparent rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
                         Login
                     </span>
                 </button>
                 <form id="login-form" class="popup hidden" onsubmit="event.preventDefault(); login(event);">
-                    <input type="text" name="username" placeholder="Username" class="p-2 mb-2 border bg-gray-500 border-gray-500 text-base text-white rounded" required />
-                    <input type="password" name="password" placeholder="Password" class="p-2 mb-2 border bg-gray-500 border-gray-500 text-base text-white rounded" required />
+                    <input type="text" name="username" placeholder="Username"
+                        class="p-2 mb-2 border bg-gray-500 border-gray-500 text-base text-white rounded" required />
+                    <input type="password" name="password" placeholder="Password"
+                        class="p-2 mb-2 border bg-gray-500 border-gray-500 text-base text-white rounded" required />
                     <div class="flex justify-center">
                         <button type="submit" class="bg-blue-500 text-white p-2 rounded">Login</button>
                     </div>
                 </form>
             </div>
-            
+
             <script>
-                document.getElementById('show-register-form').addEventListener('click', function() {
+                document.getElementById('show-register-form').addEventListener('click', function () {
                     var form = document.getElementById('register-form');
                     form.classList.toggle('hidden');
                     form.classList.toggle('show');
-                });    
-                document.getElementById('show-login-form').addEventListener('click', function() {
+                });
+                document.getElementById('show-login-form').addEventListener('click', function () {
                     var form = document.getElementById('login-form');
                     form.classList.toggle('hidden');
                     form.classList.toggle('show');
@@ -117,9 +127,11 @@
     </div>
 
     <div class="pagination flex justify-center mt-4">
-        <button onclick="prevPage()" id="prev" class="px-4 py-2 bg-blue-500 text-white rounded-l-lg">Previous</button>
+        <button onclick="prevPage()" id="prev"
+            class="px-4 py-2 bg-blue-500 text-white rounded-l-lg cursor-pointer">Previous</button>
         <span id="page-number" class="px-4 py-2">1</span>
-        <button onclick="nextPage()" id="next" class="px-4 py-2 bg-blue-500 text-white rounded-r-lg">Next</button>
+        <button onclick="nextPage()" id="next"
+            class="px-4 py-2 bg-blue-500 text-white rounded-r-lg cursor-pointer">Next</button>
     </div>
 </body>
 

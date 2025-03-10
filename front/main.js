@@ -1,10 +1,15 @@
 let currentPage = 1;
 
 async function fetchVenues(page = 1) {
+    page = Math.max(1, page)
     const response = await fetch(`http://localhost:3001/api/v1/venue/get?page=${page}`);
     const data = await response.json();
 
     if (response.ok) {
+        const pageNumber = document.getElementById('page-number');
+        if (pageNumber) {
+            pageNumber.innerText = page
+        }
         const venues = data.venues;
         const venueContainer = document.getElementById('venues');
         venueContainer.innerHTML = venues.map(v => `
@@ -35,10 +40,18 @@ function updatePagination(page) {
 }
 
 function nextPage() {
+    const pageNumber = document.getElementById('page-number');
+    if (pageNumber) {
+        currentPage = Number.parseInt(pageNumber.innerText)
+    }
     fetchVenues(currentPage + 1);
 }
 
 function prevPage() {
+    const pageNumber = document.getElementById('page-number');
+    if (pageNumber) {
+        currentPage = Number.parseInt(pageNumber.innerText)
+    }
     fetchVenues(currentPage - 1);
 }
 
