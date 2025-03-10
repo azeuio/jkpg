@@ -33,7 +33,6 @@ class Venue {
       try {
         const tmp = {}
         tmp[nom] = value
-        console.log("hey: ", tmp, " ", nom)
         const skip = (page - 1) * limit;
         return await this.model.find().sort(tmp).skip(skip).limit(limit);
       } catch (error) {

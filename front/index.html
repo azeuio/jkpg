@@ -106,10 +106,14 @@
     <div class="w-full bg-black text-white px-4 py-2 flex flex-row *:px-4 divide-x border-y sticky top-0">
         <form name="form-sort" class="flex-grow-0">
             <label for="sort">Sort by:</label>
-            <select name="sort-name" id="sort" onchange="fetchVenues()">
-                <option value="name" class="text-black">Name</option>
-                <option value="url" class="text-black">URL</option>
-                <option value="district" class="text-black">District</option>
+            <select name="sort-name" id="sort" onchange="event.preventDefault(); updateSort(event)">
+                <option name="type" value="name" class="text-black">Name</option>
+                <option name="type" value="url" class="text-black">URL</option>
+                <option name="type" value="district" class="text-black">District</option>
+            </select>
+            <select name="sort-order" id="sort-order" onchange="event.preventDefault(); updateSort(event);">
+                <option name="order" value="1" class="text-black">Ascending</option>
+                <option name="order" value="-1" class="text-black">Descending</option>
             </select>
         </form>
         <form id="form-add" name="form-add" class="flex-1" hidden>

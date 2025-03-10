@@ -1,5 +1,7 @@
 let loggedIn = false
 let currentPage = 1;
+let sortType = "name"
+let sortOrder = 1
 function loadPage() {
     const storedLoggedIn = localStorage.getItem('loggedIn');
     if (storedLoggedIn === 'true') {
@@ -17,14 +19,24 @@ function loadPage() {
 }
 loadPage()
 
+async function updateSort(event) {
+    if (event.target.name == "sort-name") {
+        sortType = event.target.value
+    } else if (event.target.name == "sort-order") {
+        sortOrder = event.target.value
+    }
+    await fetchVenues(currentPage)
+}
+
 async function fetchVenues(page = 1) {
     page = Math.max(1, page);
-    const sortType = document.getElementById('sort');
+    const elem = document.getElementById('sort');
+    sortType = elem.value
     console.log({ sortType })
     const response = await fetch(`http://localhost:3001/api/v1/venue/get?` + new URLSearchParams({
         page: page,
-        nom: sortType.value,
-        value: 1
+        nom: sortType,
+        value: sortOrder
     }));
     const data = await response.json();
 
