@@ -32,8 +32,10 @@ async function fetchVenues(page = 1) {
                     <p><a href="${v.url}" target="_blank" class="text-blue-500">${v.url}</a></p>
                     <p>District: ${v.district}</p>
                 </div>
+                <div>
+                <button onclick="showEditForm('${v._id}', '${v.name}', '${v.url}', '${v.district}')" ${loggedIn ? "" : "hidden"} class="edit-button bg-blue-500 text-white p-2">Edit</button>
                 <button onclick="deleteVenue('${v._id}')" ${loggedIn ? "" : "hidden"} class="delete-button bg-red-500 text-white p-2">Delete</button>
-                <button onclick="showEditForm('${v._id}', '${v.name}', '${v.url}', '${v.district}')" class="bg-blue-500 text-white p-2">Edit</button>
+                </div>
             </div>
         `).join('');
 
@@ -107,6 +109,9 @@ async function login(event) {
             form.hidden = false
         }
         for (const deleteButton of document.getElementsByClassName("delete-button")) {
+            deleteButton.hidden = false
+        }
+        for (const deleteButton of document.getElementsByClassName("edit-button")) {
             deleteButton.hidden = false
         }
     }
