@@ -19,7 +19,13 @@ loadPage()
 
 async function fetchVenues(page = 1) {
     page = Math.max(1, page);
-    const response = await fetch(`http://localhost:3001/api/v1/venue/get?page=${page}`);
+    const sortType = document.getElementById('sort');
+    console.log({ sortType })
+    const response = await fetch(`http://localhost:3001/api/v1/venue/get?` + new URLSearchParams({
+        page: page,
+        nom: sortType.value,
+        value: 1
+    }));
     const data = await response.json();
 
     console.log("response ", response.ok, " ", response.status);
