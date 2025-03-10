@@ -32,7 +32,7 @@ async function fetchVenues(page = 1) {
                     <p><a href="${v.url}" target="_blank" class="text-blue-500">${v.url}</a></p>
                     <p>District: ${v.district}</p>
                 </div>
-                <button onclick="showEditForm('${v._id}', '${v.name}', '${v.url}', '${v.district}')" class="bg-blue-500 text-white p-2">Edit</button>
+                <button onclick="showEditForm('${v._id}', '${v.name}', '${v.url}', '${v.district}')" class="bg-blue-500 text-white">Edit</button>
                 <button onclick="deleteVenue('${v._id}')" class="bg-red-500 text-white p-2">Delete</button>
                 <!-- Form for editing a venue, hidden by default -->
                 <form id="edit-form-${v._id}" class="edit-form" hidden>
@@ -141,29 +141,21 @@ async function register(event) {
 }
 
 function showEditForm(id, name, url, district) {
+    const editForm = document.getElementById(`edit-form-${id}`);
     const venueDiv = document.getElementById(`venue-${id}`);
-    const editForm = document.getElementById('edit-form');
-    const nameInput = document.getElementById('edit-name');
-    const urlInput = document.getElementById('edit-url');
-    const districtInput = document.getElementById('edit-district');
     
-    nameInput.value = name;
-    urlInput.value = url;
-    districtInput.value = district;
+    document.getElementById(`edit-name-${id}`).value = name;
+    document.getElementById(`edit-url-${id}`).value = url;
+    document.getElementById(`edit-district-${id}`).value = district;
 
-    editForm.onsubmit = function(event) {
-        event.preventDefault();
-        editVenue(id);
-    };
-
-    venueDiv.insertAdjacentElement('afterend', editForm);
     editForm.hidden = false;
+    venueDiv.appendChild(editForm);
 }
 
 async function editVenue(id) {
-    const name = document.getElementById('edit-name').value;
-    const url = document.getElementById('edit-url').value;
-    const district = document.getElementById('edit-district').value;
+    const name = document.getElementById(`edit-name-${id}`).value;
+    const url = document.getElementById(`edit-url-${id}`).value;
+    const district = document.getElementById(`edit-district-${id}`).value;
 
     if (!name || !url || !district) {
         alert('All fields are required for editing');
@@ -180,7 +172,7 @@ async function editVenue(id) {
         if (response.ok) {
             alert('Venue updated successfully');
             fetchVenues(currentPage);
-            hideEditForm();
+            hideEditForm(id);
         } else {
             alert('Error updating the venue');
         }
@@ -190,10 +182,7 @@ async function editVenue(id) {
     }
 }
 
-function hideEditForm() {
-    const editForm = document.getElementById('edit-form');
+function hideEditForm(id) {
+    const editForm = document.getElementById(`edit-form-${id}`);
     editForm.hidden = true;
-    document.getElementById('edit-name').value = '';
-    document.getElementById('edit-url').value = '';
-    document.getElementById('edit-district').value = '';
 }
