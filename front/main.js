@@ -134,20 +134,22 @@ async function register(event) {
 }
 
 function showEditForm(id, name, url, district) {
+    const venueDiv = document.getElementById(`venue-${id}`);
     const editForm = document.getElementById('edit-form');
     const nameInput = document.getElementById('edit-name');
     const urlInput = document.getElementById('edit-url');
     const districtInput = document.getElementById('edit-district');
-
+    
     nameInput.value = name;
     urlInput.value = url;
     districtInput.value = district;
 
-    editForm.onsubmit = function (event) {
+    editForm.onsubmit = function(event) {
         event.preventDefault();
         editVenue(id);
     };
 
+    venueDiv.insertAdjacentElement('afterend', editForm);
     editForm.hidden = false;
 }
 
