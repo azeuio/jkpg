@@ -31,8 +31,11 @@ class Venue {
     }
     async get(page = 1, limit = 10, nom = "name", value = 1) {
       try {
+        const tmp = {}
+        tmp[nom] = value
+        console.log("hey: ", tmp, " ", nom)
         const skip = (page - 1) * limit;
-        return await this.model.find().sort({ [nom]: value }).skip(skip).limit(limit);
+        return await this.model.find().sort(tmp).skip(skip).limit(limit);
       } catch (error) {
         console.error("Error getting venues:", error);
         throw new Error('Error getting venues: ' + error.message);
