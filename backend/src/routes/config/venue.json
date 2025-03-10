@@ -1,7 +1,22 @@
 [
     {
+        "path": "/v1/venue/create",
+        "method": "post",
+        "controller": "venue.createVenue"
+    },
+    {
         "path": "/v1/venue/get",
         "method": "get",
         "controller": "venue.getVenues"
+    },
+    {
+        "path": "/v1/venue/update/:id",
+        "method": "put",
+        "controller": "venue.updateVenue"
+    },
+    {
+        "path": "/v1/venue/delete/:id",
+        "method": "delete",
+        "controller": "venue.deleteVenue"
     }
 ]

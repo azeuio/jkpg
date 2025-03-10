@@ -19,6 +19,16 @@ class Venue {
   constructor(model) {
       this.model = model;
     }
+    async create(data) {
+      try {
+        const venue = new this.model(data);
+        return await venue.save();
+      }
+      catch (error) {
+        console.error("Error creating venue:", error);
+        throw new Error('Error creating venue: ' + error.message);
+      }
+    }
     async get(page = 1, limit = 10) {
       try {
         const skip = (page - 1) * limit;
@@ -34,6 +44,23 @@ class Venue {
       } catch (error) {
         console.error("Error inserting venues:", error);
         throw new Error('Error inserting venues: ' + error.message);
+      }
+    }
+    async update(id, data) {
+      try {
+        return await this.model.updateOne({ _id: id }, data);
+      }
+      catch (error) {
+        console.error("Error updating venue:", error);
+        throw new Error('Error updating venue: ' + error.message);
+      }
+    }
+    async delete(id) {
+      try {
+        return await this.model.findByIdAndDelete(id);
+      } catch (error) {
+        console.error("Error deleting venue:", error);
+        throw new Error('Error deleting venue: ' + error.message);
       }
     }
   }

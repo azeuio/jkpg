@@ -22,6 +22,26 @@ const HTTP_STATUS = {
   });
 
 
+  const createVenue = async (req, res) => {
+    try {
+        logger.info('Creating venue:', req.body);
+        const venue = await venueService.create(req.body);
+        
+        return res.status(HTTP_STATUS.CREATED).json({
+            message: 'Venue created successfully',
+            venue
+        });
+    }
+    catch (error) {
+        logger.error('Error creating venue:', error);
+        return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+            message: 'Error creating venue',
+            error: error.message
+        });
+    }
+}
+
+
   const getVenues = async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
@@ -42,7 +62,54 @@ const HTTP_STATUS = {
     }
 };
 
+    const deleteVenue = async (req, res) => {
+        try {
+            const { id } = req.params;
+            logger.info('Deleting venue:', { id });
+            const venue = await venueService.delete(id);
+            if (!venue) {
+                return res.status(HTTP_STATUS.NOT_FOUND).json({
+                    message: 'Venue not found'
+                });
+            }
+            return res.status(HTTP_STATUS.OK).json({
+                message: 'Venue deleted successfully'
+            });
+        } catch (error) {
+            logger.error('Error deleting venue:', error);
+            return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+                message: 'Error deleting venue',
+                error: error.message
+            });
+        }
+    }
+
+    const updateVenue = async (req, res) => {
+        try {
+            const { id } = req.params;
+            logger.info('Updating venue:', { id });
+            const venue = await venueService.update(id, req.body);
+            if (!venue) {
+                return res.status(HTTP_STATUS.NOT_FOUND).json({
+                    message: 'Venue not found'
+                });
+            }
+            return res.status(HTTP_STATUS.OK).json({
+                message: 'Venue updated successfully'
+            });
+        } catch (error) {
+            logger.error('Error updating venue:', error);
+            return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+                message: 'Error updating venue',
+                error: error.message
+            });
+        }
+    }
+
 
     module.exports = {
-        getVenues
+        createVenue,
+        getVenues,
+        updateVenue,
+        deleteVenue
     };
