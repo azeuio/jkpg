@@ -71,7 +71,7 @@ async function addVenue() {
     const name = document.getElementById('name').value;
     const url = document.getElementById('url').value;
     const district = document.getElementById('district').value;
-    await fetch('/venues', {
+    await fetch('http://localhost:3001/api/v1/venue/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, url, district })
@@ -80,7 +80,7 @@ async function addVenue() {
 }
 
 async function deleteVenue(id) {
-    await fetch(`/venues/${id}`, { method: 'DELETE' });
+    await fetch(`http://localhost:3001/api/v1/venue/delete/${id}`, { method: 'DELETE' });
     fetchVenues(currentPage);
 }
 
@@ -122,3 +122,31 @@ async function register(event) {
     )
 }
 
+async function editVenue(id) {
+    const name = document.getElementById(`name-${id}`).value;
+    const url = document.getElementById(`url-${id}`).value;
+    const district = document.getElementById(`district-${id}`).value;
+
+    if (!name || !url || !district) {
+        alert('All fields are required for editing');
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:3001/api/v1/venue/update/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, url, district })
+        });
+
+        if (response.ok) {
+            alert('Venue updated successfully');
+            fetchVenues(currentPage);
+        } else {
+            alert('Error updating the venue');
+        }
+    } catch (error) {
+        console.error('Network error:', error);
+        alert('Network error while updating');
+    }
+}
