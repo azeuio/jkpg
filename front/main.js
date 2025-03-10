@@ -33,10 +33,11 @@ async function fetchVenues(page = 1) {
                     <p>District: ${v.district}</p>
                 </div>
                 <button onclick="deleteVenue('${v._id}')" ${loggedIn ? "" : "hidden"} class="delete-button bg-red-500 text-white p-2">Delete</button>
+                <button onclick="showEditForm('${v._id}', '${v.name}', '${v.url}', '${v.district}')" class="bg-blue-500 text-white p-2">Edit</button>
             </div>
         `).join('');
 
-        updatePagination(page);
+        updatePagination(page, data.totalPages);
     } else {
         alert('Error fetching venues');
     }
@@ -127,10 +128,28 @@ async function register(event) {
     )
 }
 
+function showEditForm(id, name, url, district) {
+    const editForm = document.getElementById('edit-form');
+    const nameInput = document.getElementById('edit-name');
+    const urlInput = document.getElementById('edit-url');
+    const districtInput = document.getElementById('edit-district');
+
+    nameInput.value = name;
+    urlInput.value = url;
+    districtInput.value = district;
+
+    editForm.onsubmit = function (event) {
+        event.preventDefault();
+        editVenue(id);
+    };
+
+    editForm.hidden = false;
+}
+
 async function editVenue(id) {
-    const name = document.getElementById(`name-${id}`).value;
-    const url = document.getElementById(`url-${id}`).value;
-    const district = document.getElementById(`district-${id}`).value;
+    const name = document.getElementById('edit-name').value;
+    const url = document.getElementById('edit-url').value;
+    const district = document.getElementById('edit-district').value;
 
     if (!name || !url || !district) {
         alert('All fields are required for editing');
@@ -147,6 +166,7 @@ async function editVenue(id) {
         if (response.ok) {
             alert('Venue updated successfully');
             fetchVenues(currentPage);
+            hideEditForm();
         } else {
             alert('Error updating the venue');
         }
@@ -154,4 +174,12 @@ async function editVenue(id) {
         console.error('Network error:', error);
         alert('Network error while updating');
     }
+}
+
+function hideEditForm() {
+    const editForm = document.getElementById('edit-form');
+    editForm.hidden = true;
+    document.getElementById('edit-name').value = '';
+    document.getElementById('edit-url').value = '';
+    document.getElementById('edit-district').value = '';
 }
