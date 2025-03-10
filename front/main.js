@@ -26,14 +26,16 @@ async function fetchVenues(page = 1) {
         const venues = data.venues;
         const venueContainer = document.getElementById('venues');
         venueContainer.innerHTML = venues.map(v => `
-            <div id="venue-${v._id}" class="p-4 border rounded bg-gray-100 flex justify-between items-center">
-                <div>
+            <div id="venue-${v._id}" class="venue-item p-4 border rounded bg-gray-100 flex justify-between items-center">
+                <div class="venue-info">
                     <h3 class="text-lg font-semibold">${v.name}</h3>
                     <p><a href="${v.url}" target="_blank" class="text-blue-500">${v.url}</a></p>
                     <p>District: ${v.district}</p>
                 </div>
-                <button onclick="showEditForm('${v._id}', '${v.name}', '${v.url}', '${v.district}')" class="bg-blue-500 text-white">Edit</button>
-                <button onclick="deleteVenue('${v._id}')" class="bg-red-500 text-white p-2">Delete</button>
+                <div class="venue-actions flex space-x-2"> <!-- Flex container for the buttons -->
+                    <button onclick="showEditForm('${v._id}', '${v.name}', '${v.url}', '${v.district}')" class="bg-blue-500 text-white p-2">Edit</button>
+                    <button onclick="deleteVenue('${v._id}')" class="bg-red-500 text-white p-2">Delete</button>
+                </div>
                 <!-- Form for editing a venue, hidden by default -->
                 <form id="edit-form-${v._id}" class="edit-form" hidden>
                     <input type="text" id="edit-name-${v._id}" placeholder="Name" value="${v.name}" required>
