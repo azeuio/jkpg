@@ -1,3 +1,4 @@
+let loggedIn = false
 let currentPage = 1;
 function loadPage() {
     console.log("hello")
@@ -31,7 +32,7 @@ async function fetchVenues(page = 1) {
                     <p><a href="${v.url}" target="_blank" class="text-blue-500">${v.url}</a></p>
                     <p>District: ${v.district}</p>
                 </div>
-                <button onclick="deleteVenue('${v._id}')" class="bg-red-500 text-white p-2">Delete</button>
+                <button onclick="deleteVenue('${v._id}')" ${loggedIn ? "" : "hidden"} class="delete-button bg-red-500 text-white p-2">Delete</button>
             </div>
         `).join('');
 
@@ -99,9 +100,13 @@ async function login(event) {
         }
     )
     if (response.ok) {
+        loggedIn = true
         const form = document.getElementById("form-add")
         if (form) {
             form.hidden = false
+        }
+        for (const deleteButton of document.getElementsByClassName("delete-button")) {
+            deleteButton.hidden = false
         }
     }
 }
