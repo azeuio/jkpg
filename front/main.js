@@ -113,6 +113,7 @@ async function login(event) {
         const form = document.getElementById("form-add")
         if (form) {
             form.hidden = false
+            form.focus()
         }
         for (const deleteButton of document.getElementsByClassName("delete-button")) {
             deleteButton.hidden = false
