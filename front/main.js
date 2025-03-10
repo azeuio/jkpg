@@ -13,33 +13,39 @@ function loadPage() {
 loadPage()
 
 async function fetchVenues(page = 1) {
-    page = Math.max(1, page)
+    page = Math.max(1, page);
     const response = await fetch(`http://localhost:3001/api/v1/venue/get?page=${page}`);
     const data = await response.json();
 
-    console.log("response ", response.ok, " ", response.status)
+    console.log("response ", response.ok, " ", response.status);
     if (response.ok) {
         const pageNumber = document.getElementById('page-number');
         if (pageNumber) {
-            pageNumber.innerText = page
+            pageNumber.innerText = page;
         }
         const venues = data.venues;
         const venueContainer = document.getElementById('venues');
         venueContainer.innerHTML = venues.map(v => `
-            <div class="p-4 border rounded bg-gray-100 flex justify-between items-center">
+            <div id="venue-${v._id}" class="p-4 border rounded bg-gray-100 flex justify-between items-center">
                 <div>
                     <h3 class="text-lg font-semibold">${v.name}</h3>
                     <p><a href="${v.url}" target="_blank" class="text-blue-500">${v.url}</a></p>
                     <p>District: ${v.district}</p>
                 </div>
-                <div>
-                <button onclick="showEditForm('${v._id}', '${v.name}', '${v.url}', '${v.district}')" ${loggedIn ? "" : "hidden"} class="edit-button bg-blue-500 text-white p-2">Edit</button>
-                <button onclick="deleteVenue('${v._id}')" ${loggedIn ? "" : "hidden"} class="delete-button bg-red-500 text-white p-2">Delete</button>
-                </div>
+                <button onclick="showEditForm('${v._id}', '${v.name}', '${v.url}', '${v.district}')" class="bg-blue-500 text-white p-2">Edit</button>
+                <button onclick="deleteVenue('${v._id}')" class="bg-red-500 text-white p-2">Delete</button>
+                <!-- Form for editing a venue, hidden by default -->
+                <form id="edit-form-${v._id}" class="edit-form" hidden>
+                    <input type="text" id="edit-name-${v._id}" placeholder="Name" value="${v.name}" required>
+                    <input type="text" id="edit-url-${v._id}" placeholder="URL" value="${v.url}" required>
+                    <input type="text" id="edit-district-${v._id}" placeholder="District" value="${v.district}" required>
+                    <button type="submit" class="bg-blue-500 text-white p-2">Save Changes</button>
+                    <button type="button" onclick="hideEditForm('${v._id}')" class="bg-gray-500 text-white p-2">Cancel</button>
+                </form>
             </div>
         `).join('');
 
-        updatePagination(page, data.totalPages);
+        updatePagination(page);
     } else {
         alert('Error fetching venues');
     }
