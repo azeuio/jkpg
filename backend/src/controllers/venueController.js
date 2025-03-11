@@ -106,7 +106,6 @@ const HTTP_STATUS = {
         }
     }
 
-
     module.exports = {
         createVenue,
         getVenues,

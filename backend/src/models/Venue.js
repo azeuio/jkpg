@@ -12,6 +12,10 @@ const VenueSchema = new mongoose.Schema({
   district: { 
     type: String, 
     required: false 
+  },
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
   }
 });
 
@@ -31,8 +35,12 @@ class Venue {
     }
     async get(page = 1, limit = 10, nom = "name", value = 1) {
       try {
+        if (isNaN(value)) {
+          value = 1;
+        }
         const tmp = {}
-        tmp[nom] = value
+        tmp[nom] = value;
+        console.log(value)
         const skip = (page - 1) * limit;
         return await this.model.find().sort(tmp).skip(skip).limit(limit);
       } catch (error) {
