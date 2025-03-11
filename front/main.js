@@ -62,10 +62,11 @@ async function fetchVenues(page = 1) {
                 </div>
                 </div>
                 <!-- Form for editing a venue, hidden by default -->
-                <form id="edit-form-${v._id}" class="edit-form" hidden>
-                    <input type="text" id="edit-name-${v._id}" placeholder="Name" value="${v.name}" required>
-                    <input type="text" id="edit-url-${v._id}" placeholder="URL" value="${v.url}" required>
-                    <input type="text" id="edit-district-${v._id}" placeholder="District" value="${v.district}" required>
+                <form id="edit-form-${v._id}" class="edit-form" hidden onsubmit="event.preventDefault(); editVenue(event);">
+                    <input type="text" name="name" id="edit-name-${v._id}" placeholder="Name" value="${v.name}" required>
+                    <input type="text" name="url" id="edit-url-${v._id}" placeholder="URL" value="${v.url}" required>
+                    <input type="text" name="district" id="edit-district-${v._id}" placeholder="District" value="${v.district}" required>
+
                     <button type="submit" class="bg-blue-500 text-white p-2">Save Changes</button>
                     <button type="button" onclick="hideEditForm('${v._id}')" class="bg-gray-500 text-white p-2">Cancel</button>
                 </form>
@@ -180,11 +181,12 @@ function showEditForm(id, name, url, district) {
     venueDiv.appendChild(editForm);
 }
 
-async function editVenue(id) {
-    const name = document.getElementById(`edit-name-${id}`).value;
-    const url = document.getElementById(`edit-url-${id}`).value;
-    const district = document.getElementById(`edit-district-${id}`).value;
-
+async function editVenue(event) {
+    const fd = new FormData(event.target)
+    const id = event.target.id.replace("edit-form-", "")
+    const name = fd.get("name")
+    const url = fd.get("url")
+    const district = fd.get("district")
     if (!name || !url || !district) {
         alert('All fields are required for editing');
         return;
