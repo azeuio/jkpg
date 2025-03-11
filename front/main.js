@@ -200,7 +200,6 @@ async function editVenue(event) {
         });
 
         if (response.ok) {
-            alert('Venue updated successfully');
             fetchVenues(currentPage);
             hideEditForm(id);
         } else {
